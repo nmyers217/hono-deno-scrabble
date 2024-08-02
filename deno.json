@@ -1,21 +1,7 @@
 {
-  "imports": {
-    "hono": "jsr:@hono/hono@^4.5.3"
-  },
   "tasks": {
-    "start": "deno run --allow-net --allow-env --allow-read main.ts",
-    "start:watch": "deno run --allow-net --allow-env --allow-read --watch main.ts"
-  },
-  "compilerOptions": {
-    "jsx": "precompile",
-    "jsxImportSource": "hono/jsx"
-  },
-  "deploy": {
-    "project": "32eef980-ab7d-4fbc-ba56-4772ac86cb98",
-    "exclude": [
-      "**/node_modules"
-    ],
-    "include": [],
-    "entrypoint": "main.ts"
+    "dev:pwa": "cd pwa && deno task dev",
+    "dev:server": "cd server && deno task dev",
+    "dev": "sleep 1 && deno task dev:pwa & deno task dev:server"
   }
 }

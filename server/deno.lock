@@ -1,0 +1,102 @@
+{
+  "version": "3",
+  "packages": {
+    "specifiers": {
+      "jsr:@hono/hono@^4.5.3": "jsr:@hono/hono@4.5.3",
+      "jsr:@std/dotenv": "jsr:@std/dotenv@0.225.0",
+      "npm:@auth/core": "npm:@auth/core@0.30.0_preact@10.11.3",
+      "npm:@hono/auth-js": "npm:@hono/auth-js@1.0.10_@auth+core@0.30.0__preact@10.11.3_hono@4.2.8_react@18.2.0"
+    },
+    "jsr": {
+      "@hono/hono@4.5.3": {
+        "integrity": "429923b2b3c6586a1450862328d61a1346fee5841e8ae86c494250475057213c"
+      },
+      "@std/dotenv@0.225.0": {
+        "integrity": "44db32932c67df82790a3e6847d7007befb6cc22d71f2f3ee7b7d00e1f0d6c94"
+      }
+    },
+    "npm": {
+      "@auth/core@0.30.0_preact@10.11.3": {
+        "integrity": "sha512-8AE4m/nk+4EIiVCJwxZAsJeAQuzpEC8M8768mmKVn60CGDdupKQkVhxbRlm5Qh7eNRCoFFME+0DvtaX2aXrYaA==",
+        "dependencies": {
+          "@panva/hkdf": "@panva/hkdf@1.1.1",
+          "@types/cookie": "@types/cookie@0.6.0",
+          "cookie": "cookie@0.6.0",
+          "jose": "jose@5.2.4",
+          "oauth4webapi": "oauth4webapi@2.10.4",
+          "preact": "preact@10.11.3",
+          "preact-render-to-string": "preact-render-to-string@5.2.3_preact@10.11.3"
+        }
+      },
+      "@hono/auth-js@1.0.10_@auth+core@0.30.0__preact@10.11.3_hono@4.2.8_react@18.2.0": {
+        "integrity": "sha512-hnkZzPMHveX2GzX/zS53uP6OqzB6SCtJCaimXdjewCWWiNi4FFtv1jcsca3PV7haiaLKict5JPZWzfMq+t3Bzw==",
+        "dependencies": {
+          "@auth/core": "@auth/core@0.30.0_preact@10.11.3",
+          "hono": "hono@4.2.8",
+          "react": "react@18.2.0"
+        }
+      },
+      "@panva/hkdf@1.1.1": {
+        "integrity": "sha512-dhPeilub1NuIG0X5Kvhh9lH4iW3ZsHlnzwgwbOlgwQ2wG1IqFzsgHqmKPk3WzsdWAeaxKJxgM0+W433RmN45GA==",
+        "dependencies": {}
+      },
+      "@types/cookie@0.6.0": {
+        "integrity": "sha512-4Kh9a6B2bQciAhf7FSuMRRkUWecJgJu9nPnx3yzpsfXX/c50REIqpHY4C82bXP90qrLtXtkDxTZosYO3UpOwlA==",
+        "dependencies": {}
+      },
+      "cookie@0.6.0": {
+        "integrity": "sha512-U71cyTamuh1CRNCfpGY6to28lxvNwPG4Guz/EVjgf3Jmzv0vlDp1atT9eS5dDjMYHucpHbWns6Lwf3BKz6svdw==",
+        "dependencies": {}
+      },
+      "hono@4.2.8": {
+        "integrity": "sha512-re/zNrOWb7Sp9KhojlMEgcgvqsE8Rgk9IcmumqsbKa9ruPT5XuOcx1U+xuNaI4SUnwrPsiTQ72MiodtpJEVfjg==",
+        "dependencies": {}
+      },
+      "jose@5.2.4": {
+        "integrity": "sha512-6ScbIk2WWCeXkmzF6bRPmEuaqy1m8SbsRFMa/FLrSCkGIhj8OLVG/IH+XHVmNMx/KUo8cVWEE6oKR4dJ+S0Rkg==",
+        "dependencies": {}
+      },
+      "js-tokens@4.0.0": {
+        "integrity": "sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==",
+        "dependencies": {}
+      },
+      "loose-envify@1.4.0": {
+        "integrity": "sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==",
+        "dependencies": {
+          "js-tokens": "js-tokens@4.0.0"
+        }
+      },
+      "oauth4webapi@2.10.4": {
+        "integrity": "sha512-DSoj8QoChzOCQlJkRmYxAJCIpnXFW32R0Uq7avyghIeB6iJq0XAblOD7pcq3mx4WEBDwMuKr0Y1qveCBleG2Xw==",
+        "dependencies": {}
+      },
+      "preact-render-to-string@5.2.3_preact@10.11.3": {
+        "integrity": "sha512-aPDxUn5o3GhWdtJtW0svRC2SS/l8D9MAgo2+AWml+BhDImb27ALf04Q2d+AHqUUOc6RdSXFIBVa2gxzgMKgtZA==",
+        "dependencies": {
+          "preact": "preact@10.11.3",
+          "pretty-format": "pretty-format@3.8.0"
+        }
+      },
+      "preact@10.11.3": {
+        "integrity": "sha512-eY93IVpod/zG3uMF22Unl8h9KkrcKIRs2EGar8hwLZZDU1lkjph303V9HZBwufh2s736U6VXuhD109LYqPoffg==",
+        "dependencies": {}
+      },
+      "pretty-format@3.8.0": {
+        "integrity": "sha512-WuxUnVtlWL1OfZFQFuqvnvs6MiAGk9UNsBostyBOB0Is9wb5uRESevA6rnl/rkksXaGX3GzZhPup5d6Vp1nFew==",
+        "dependencies": {}
+      },
+      "react@18.2.0": {
+        "integrity": "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==",
+        "dependencies": {
+          "loose-envify": "loose-envify@1.4.0"
+        }
+      }
+    }
+  },
+  "remote": {},
+  "workspace": {
+    "dependencies": [
+      "jsr:@hono/hono@^4.5.3"
+    ]
+  }
+}
