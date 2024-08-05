@@ -60,22 +60,24 @@ export const users = pgTable(
     id: serial("id").primaryKey(),
     username: varchar("username", { length: 256 }).notNull(),
     email: varchar("email", { length: 256 }).notNull(),
-    createdAt: timestamp("createdAt").notNull().defaultNow(),
-    updatedAt: timestamp("updatedAt").notNull().defaultNow(),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+    updatedAt: timestamp("updated_at").notNull().defaultNow(),
   },
   (table) => ({
     usernameIdx: index("users_username_idx").on(table.username),
     emailIds: index("users_email_idx").on(table.email),
   }),
 );
+export type User = typeof users.$inferSelect;
 
 // Game table
 export const games = pgTable("games", {
   id: serial("id").primaryKey(),
   isActive: boolean("isActive").notNull().default(true),
-  createdAt: timestamp("createdAt").notNull().defaultNow(),
-  updatedAt: timestamp("updatedAt").notNull().defaultNow(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
+export type Game = typeof games.$inferSelect;
 
 // Player table
 export const players = pgTable(
@@ -89,15 +91,15 @@ export const players = pgTable(
       .notNull()
       .references(() => games.id),
     score: integer("score").notNull().default(0),
-    createdAt: timestamp("createdAt").notNull().defaultNow(),
-    updatedAt: timestamp("updatedAt").notNull().defaultNow(),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+    updatedAt: timestamp("updated_at").notNull().defaultNow(),
   },
   (table) => ({
-    userIdx: index("players_user_idx").on(table.userId),
-    gameIdx: index("players_game_idx").on(table.gameId),
-    userGameIdx: index("players_user_game_idx").on(table.userId, table.gameId),
+    userIdx: index("players_user_id_idx").on(table.userId),
+    gameIdx: index("players_game_id_idx").on(table.gameId),
   }),
 );
+export type Player = typeof players.$inferSelect;
 
 // Tile table
 export const tiles = pgTable(
@@ -106,13 +108,14 @@ export const tiles = pgTable(
     id: serial("id").primaryKey(),
     letter: letterEnum("letter").unique().notNull(),
     value: integer("value").notNull(),
-    createdAt: timestamp("createdAt").notNull().defaultNow(),
-    updatedAt: timestamp("updatedAt").notNull().defaultNow(),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+    updatedAt: timestamp("updated_at").notNull().defaultNow(),
   },
   (table) => ({
     letterIdx: index("letter_idx").on(table.letter),
   }),
 );
+export type Tile = typeof tiles.$inferSelect;
 
 // Board table
 export const boards = pgTable(
@@ -125,15 +128,19 @@ export const boards = pgTable(
     tileId: integer("tile_id")
       .notNull()
       .references(() => tiles.id),
-    x: integer("x").notNull(),
-    y: integer("y").notNull(),
-    createdAt: timestamp("createdAt").notNull().defaultNow(),
-    updatedAt: timestamp("updatedAt").notNull().defaultNow(),
+    point: point("point").notNull(),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+    updatedAt: timestamp("updated_at").notNull().defaultNow(),
   },
   (table) => ({
-    gameIdx: index("boards_game_idx").on(table.gameId),
+    gameIdx: index("boards_game_id_idx").on(table.gameId),
+    gameTileIdx: index("boards_game_id_tile_id_idx").on(
+      table.gameId,
+      table.tileId,
+    ),
   }),
 );
+export type Board = typeof boards.$inferSelect;
 
 // Move table
 export const moves = pgTable(
@@ -153,19 +160,20 @@ export const moves = pgTable(
     // TODO: Better way to store secondaries?
     secondaries: text("secondaries").notNull().default(""),
     score: integer("score").notNull(),
-    createdAt: timestamp("createdAt").notNull().defaultNow(),
-    updatedAt: timestamp("updatedAt").notNull().defaultNow(),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+    updatedAt: timestamp("updated_at").notNull().defaultNow(),
   },
   (table) => ({
-    gamePlayerIdx: index("moves_game_player_idx").on(
+    gameIdx: index("moves_game_id_idx").on(table.gameId),
+    playerIdx: index("moves_player_id_idx").on(table.playerId),
+    gamePlayerIdx: index("moves_game_id_player_id_idx").on(
       table.gameId,
       table.playerId,
     ),
-    gameIdx: index("moves_game_idx").on(table.gameId),
-    playerIdx: index("moves_player_idx").on(table.playerId),
-    wordIdx: index("moves_word_idx").on(table.word),
+    wordIdx: index("moves_word_id_idx").on(table.word),
   }),
 );
+export type Move = typeof moves.$inferSelect;
 
 // MoveTile table
 export const moveTiles = pgTable(
@@ -180,18 +188,58 @@ export const moveTiles = pgTable(
       .references(() => tiles.id),
     point: point("point").notNull(),
     order: integer("order").notNull(),
-    createdAt: timestamp("createdAt").notNull().defaultNow(),
-    updatedAt: timestamp("updatedAt").notNull().defaultNow(),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+    updatedAt: timestamp("updated_at").notNull().defaultNow(),
   },
   (table) => ({
-    moveIdx: index("move_tiles_move_idx").on(table.moveId),
+    moveIdx: index("move_tiles_move_id_idx").on(table.moveId),
   }),
 );
-
-export type User = typeof users.$inferSelect;
-export type Game = typeof games.$inferSelect;
-export type Player = typeof players.$inferSelect;
-export type Tile = typeof tiles.$inferSelect;
-export type Board = typeof boards.$inferSelect;
-export type Move = typeof moves.$inferSelect;
 export type MoveTile = typeof moveTiles.$inferSelect;
+
+// The players tile trays
+export const playerTiles = pgTable(
+  "player_tiles",
+  {
+    id: serial("id").primaryKey(),
+    playerId: integer("player_id")
+      .notNull()
+      .references(() => players.id),
+    gameId: integer("game_id")
+      .notNull()
+      .references(() => games.id),
+    tileId: integer("tile_id")
+      .notNull()
+      .references(() => tiles.id),
+    order: integer("order").notNull(),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+    updatedAt: timestamp("updated_at").notNull().defaultNow(),
+  },
+  (table) => ({
+    playerGameIdx: index("player_tiles_player_id_game_id_idx").on(
+      table.playerId,
+      table.gameId,
+    ),
+  }),
+);
+export type PlayerTile = typeof playerTiles.$inferSelect;
+
+// The bag of tiles for the game
+export const bags = pgTable(
+  "bags",
+  {
+    id: serial("id").primaryKey(),
+    gameId: integer("game_id")
+      .notNull()
+      .references(() => games.id),
+    tileId: integer("tile_id")
+      .notNull()
+      .references(() => tiles.id),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+    updatedAt: timestamp("updated_at").notNull().defaultNow(),
+  },
+  (table) => ({
+    gameIdx: index("bags_game_id_idx").on(table.gameId),
+  }),
+);
+export type Bag = typeof bags.$inferSelect;
