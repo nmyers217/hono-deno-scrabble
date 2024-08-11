@@ -1,7 +1,0 @@
-{
-  "tasks": {
-    "dev:pwa": "cd pwa && deno task dev",
-    "dev:server": "cd server && deno task dev",
-    "dev": "sleep 1 && deno task dev:pwa & deno task dev:server"
-  }
-}
