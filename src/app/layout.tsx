@@ -11,6 +11,9 @@ import {
   SignInButton,
   UserButton,
 } from "@clerk/nextjs";
+import { Button } from "~/components/ui/button";
+
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -20,15 +23,33 @@ export const metadata: Metadata = {
 
 function TopNav() {
   return (
-    <nav className="flex items-center justify-between bg-gray-800 px-8 py-4 text-white">
-      <p>Scrabble</p>
-      <SignedOut>
-        <SignInButton />
-      </SignedOut>
-      <SignedIn>
-        <UserButton />
-      </SignedIn>
-    </nav>
+    <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
+      <nav className="full container flex flex-row items-center justify-between gap-6 text-lg font-medium">
+        <Link
+          href="/"
+          className="flex items-center gap-0 text-lg font-semibold md:text-base"
+        >
+          {/* The word scrabble but like scrabble tiles using the kbd element */}
+          {"SCRABBLE".split("").map((letter, index) => (
+            <kbd
+              key={index}
+              className="mx-0.5 h-8 w-8 rounded-md bg-yellow-950 py-1 text-center text-yellow-200"
+            >
+              {letter}
+            </kbd>
+          ))}
+        </Link>
+
+        <SignedOut>
+          <SignInButton>
+            <Button size={"lg"}>Sign In</Button>
+          </SignInButton>
+        </SignedOut>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
+      </nav>
+    </header>
   );
 }
 
@@ -43,9 +64,7 @@ export default function RootLayout({
     >
       <html lang="en" className={`${GeistSans.variable}`}>
         <body className="dark">
-          <header>
-            <TopNav />
-          </header>
+          <TopNav />
 
           {children}
         </body>
