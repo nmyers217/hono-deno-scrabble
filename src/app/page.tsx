@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Hero from "~/components/hero";
+import Hero from "~/components/Hero";
 
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 
