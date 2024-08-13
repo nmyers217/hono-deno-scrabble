@@ -14,6 +14,7 @@ import {
 import { Button } from "~/components/ui/button";
 
 import Link from "next/link";
+import ScrabbleTile from "~/components/ui/scrabble-tile";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -29,15 +30,16 @@ function TopNav() {
           href="/"
           className="flex items-center gap-0 text-lg font-semibold md:text-base"
         >
-          {/* The word scrabble but like scrabble tiles using the kbd element */}
-          {"SCRABBLE".split("").map((letter, index) => (
-            <kbd
-              key={index}
-              className="mx-0.5 h-8 w-8 rounded-md bg-yellow-950 py-1 text-center text-yellow-200"
-            >
-              {letter}
-            </kbd>
-          ))}
+          <div className="flex gap-1">
+            {"SCRABBLE".split("").map((letter, index) => (
+              <ScrabbleTile
+                key={index}
+                letter={letter}
+                size={2}
+                theme="gruvbox"
+              />
+            ))}
+          </div>
         </Link>
 
         <SignedOut>
