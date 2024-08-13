@@ -1,5 +1,8 @@
-import React from "react";
+"use client";
+
 import { cva, type VariantProps } from "class-variance-authority";
+import { motion } from "framer-motion";
+import React from "react";
 
 const scrabbleTileStyles = cva(
   "inline-block text-center font-bold border-2 rounded",
@@ -40,7 +43,7 @@ export default function ScrabbleTile({
   const fontSizeRem = `${size * 0.6}rem`;
 
   return (
-    <div
+    <motion.div
       className={scrabbleTileStyles({ theme })}
       style={{
         width: sizeRem,
@@ -51,8 +54,16 @@ export default function ScrabbleTile({
         backgroundColor,
         color: textColor,
       }}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 1.2 }}
+      whileDrag={{
+        scale: 1.2,
+        rotate: -5,
+        transition: { duration: 0.2 },
+      }}
+      drag
     >
       {letter}
-    </div>
+    </motion.div>
   );
 }
