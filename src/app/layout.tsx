@@ -28,18 +28,17 @@ function TopNav() {
       <nav className="full container flex flex-row items-center justify-between gap-6 text-lg font-medium">
         <Link
           href="/"
-          className="flex items-center gap-0 text-lg font-semibold md:text-base"
+          className="flex items-center gap-1 text-lg font-semibold hover:scale-110 hover:transition-transform md:text-base"
         >
-          <div className="flex gap-1">
-            {"SCRABBLE".split("").map((letter, index) => (
-              <ScrabbleTile
-                key={index}
-                letter={letter}
-                size={2}
-                theme="gruvbox"
-              />
-            ))}
-          </div>
+          {"SCRABBLE".split("").map((letter, index) => (
+            <ScrabbleTile
+              key={index}
+              letter={letter}
+              size={2}
+              theme="gruvbox"
+              disabled
+            />
+          ))}
         </Link>
 
         <SignedOut>

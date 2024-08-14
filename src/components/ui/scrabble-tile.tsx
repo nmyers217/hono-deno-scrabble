@@ -28,6 +28,7 @@ interface ScrabbleTileProps extends VariantProps<typeof scrabbleTileStyles> {
   backgroundColor?: string;
   textColor?: string;
   size?: number;
+  disabled?: boolean;
 }
 
 export default function ScrabbleTile({
@@ -37,6 +38,7 @@ export default function ScrabbleTile({
   backgroundColor,
   textColor,
   size = 2.5,
+  disabled = false,
 }: ScrabbleTileProps) {
   const sizeRem = `${size ?? 2.5}rem`;
   const lineHeightRem = `${size - 0.25}rem`;
@@ -54,14 +56,18 @@ export default function ScrabbleTile({
         backgroundColor,
         color: textColor,
       }}
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 1.2 }}
-      whileDrag={{
-        scale: 1.2,
-        rotate: -5,
-        transition: { duration: 0.2 },
-      }}
-      drag
+      whileHover={!disabled ? { scale: 1.1 } : {}}
+      whileTap={!disabled ? { scale: 1.2 } : {}}
+      whileDrag={
+        !disabled
+          ? {
+              scale: 1.2,
+              rotate: -5,
+              transition: { duration: 0.2 },
+            }
+          : {}
+      }
+      drag={!disabled}
     >
       {letter}
     </motion.div>
