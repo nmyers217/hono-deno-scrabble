@@ -24,8 +24,8 @@ export const metadata: Metadata = {
 
 function TopNav() {
   return (
-    <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
-      <nav className="full container flex flex-row items-center justify-between gap-6 text-lg font-medium">
+    <header className="sticky top-0 flex h-16 w-screen flex-row items-center border-b bg-background px-4 md:px-6">
+      <nav className="flex w-full justify-between gap-6 text-lg font-medium">
         <Link
           href="/"
           className="flex items-center gap-1 text-lg font-semibold hover:scale-110 hover:transition-transform md:text-base"
@@ -34,7 +34,7 @@ function TopNav() {
             <ScrabbleTile
               key={index}
               letter={letter}
-              size={2}
+              size={1.25}
               theme="gruvbox"
               disabled
             />
@@ -43,7 +43,7 @@ function TopNav() {
 
         <SignedOut>
           <SignInButton>
-            <Button size={"lg"}>Sign In</Button>
+            <Button>Sign In</Button>
           </SignInButton>
         </SignedOut>
         <SignedIn>
